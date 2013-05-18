@@ -32,7 +32,8 @@ public class MainActivity extends Activity {
 		list.add(new Product("Trimtex O-Socks",
 				"These be some great socks", "THIS IS A FANTASTIC DESCRIPTION ipsum lorem rida roo",
 				40.0,R.drawable.socks));
-
+		list.addAll(list);
+		list.addAll(list);
 		ArrayAdapter<Product> adapter = new ProductArrayAdapter(this, list);
 
 		productContainer.setAdapter(adapter);
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Toast.makeText(getApplicationContext(), "Item no. " + position,
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

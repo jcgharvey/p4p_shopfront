@@ -29,11 +29,11 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
 		View rowView = inflater.inflate(R.layout.product_list_item, parent,
 				false);
 		TextView titleView = (TextView) rowView.findViewById(R.id.listProductTitle);
-		TextView descriptionView = (TextView) rowView.findViewById(R.id.listProductDescription);
+		TextView blurbView = (TextView) rowView.findViewById(R.id.listProductBlurb);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.listProductImage);
 		
 		titleView.setText(product.getTitle());
-		descriptionView.setText(product.getDescription());
+		blurbView.setText(product.getBlurb());
 		imageView.setImageResource(product.getimageId());
 		
 		return rowView;
