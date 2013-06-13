@@ -1,5 +1,8 @@
 package com.receiptspp.shopfrontmockup;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.roscopeco.ormdroid.Column;
 import com.roscopeco.ormdroid.Entity;
 import com.roscopeco.ormdroid.Table;
@@ -12,8 +15,10 @@ public class Product extends Entity {
 	public String description;
 	public String blurb;
 	public double price;
-	private String colour;
 	public int imageId;
+	
+	public static final String titleKey = "title";
+	public static final String priceKey = "price";
 	
 	public Product()
 	{
@@ -58,5 +63,17 @@ public class Product extends Entity {
 	
 	public int getimageId(){
 		return this.imageId;
+	}
+	
+	public JSONObject toJSON(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put(titleKey, title);
+			json.put(priceKey, price);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return json;
 	}
 }
