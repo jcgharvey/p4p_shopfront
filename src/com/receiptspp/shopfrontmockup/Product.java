@@ -17,9 +17,6 @@ public class Product extends Entity {
 	public double price;
 	public int imageId;
 	
-	public static final String titleKey = "title";
-	public static final String priceKey = "price";
-	
 	public Product()
 	{
 		this(null,null,null,0.0,0);
@@ -68,12 +65,13 @@ public class Product extends Entity {
 	public JSONObject toJSON(){
 		JSONObject json = new JSONObject();
 		try {
-			json.put(titleKey, title);
-			json.put(priceKey, price);
+			json.put(Keys.productTitle, title);
+			json.put(Keys.productPrice, price);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;
 		}
 		return json;
 	}
+
 }
