@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,45 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".ProductActivity" >
 
-    <ImageView
-        android:id="@+id/viewProductImage"
-        android:layout_width="172dp"
-        android:layout_height="240dp"
-        android:paddingRight="16dp" />
-
-    <TextView
-        android:id="@+id/viewProductTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/viewProductImage"
-        android:paddingTop="4dp"
-        android:textIsSelectable="false"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/viewProductBlurb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/viewProductTitle"
-        android:layout_toRightOf="@id/viewProductImage"
-        android:textIsSelectable="false"
-        android:textSize="16dp" />
-
-    <TextView
-        android:id="@+id/viewProductDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/viewProductBlurb"
-        android:layout_toRightOf="@id/viewProductImage"
-        android:textIsSelectable="false"
-        android:textSize="14dp" />
+   	<include layout="@layout/product_description"
+   	    android:id="@+id/product_description_panel"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/buyButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:text="@string/buyButton"/>
+        android:layout_height="wrap_content"
+        android:text="@string/buyButton" />
 
-</RelativeLayout>
+</LinearLayout>

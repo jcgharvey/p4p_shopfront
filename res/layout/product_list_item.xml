@@ -27,5 +27,5 @@
         android:layout_toRightOf="@id/listProductImage"
         android:textIsSelectable="false"
         android:textSize="14dp" />
-
+	
 </RelativeLayout>

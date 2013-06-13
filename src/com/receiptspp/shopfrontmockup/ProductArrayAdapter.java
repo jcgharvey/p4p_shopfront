@@ -28,13 +28,14 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.product_list_item, parent,
 				false);
+		rowView.setTag(R.id.productId, product.id);
 		TextView titleView = (TextView) rowView.findViewById(R.id.listProductTitle);
 		TextView blurbView = (TextView) rowView.findViewById(R.id.listProductBlurb);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.listProductImage);
 		
-		titleView.setText(product.getTitle());
-		blurbView.setText(product.getBlurb());
-		imageView.setImageResource(product.getimageId());
+		titleView.setText(product.title);
+		blurbView.setText(product.blurb);
+		imageView.setImageResource(product.imageId);
 		
 		return rowView;
 	}

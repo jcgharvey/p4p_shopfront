@@ -26,6 +26,9 @@
             android:name="com.receiptspp.shopfrontmockup.ProductActivity"
             android:label="@string/title_activity_product" >
         </activity>
+        <meta-data
+            android:name="ormdroid.database.name"
+            android:value="products" />
     </application>
 
 </manifest>
