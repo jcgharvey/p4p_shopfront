@@ -5,9 +5,11 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_product">ProductActivity</string>
+    <string name="addItemToCart">Add Item to Cart</string>
 
-    <string name="buyButton">Buy</string>
-    
     <!-- CONSTANTS -->
     <string name="product">Product</string>
+    <string name="title_activity_checkout">Checkout</string>
+    <string name="title_activity_cart">Shopping Cart</string>
+
 </resources>

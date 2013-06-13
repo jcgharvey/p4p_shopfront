@@ -39,12 +39,12 @@ public class ProductActivity extends Activity {
 		descriptionView.setText(product.description);
 		imageView.setImageResource(product.imageId);
 
-		Button buyButton = (Button) findViewById(R.id.buyButton);
+		Button addItemButton = (Button) findViewById(R.id.addItemToCart);
 
-		buyButton.setOnClickListener(new OnClickListener() {
+		addItemButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getApplicationContext(), "Buy",
+				Toast.makeText(getApplicationContext(), "Add",
 						Toast.LENGTH_SHORT).show();
 			}
 		});

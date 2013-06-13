@@ -30,13 +30,19 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
 				false);
 		rowView.setTag(R.id.productId, product.id);
 		TextView titleView = (TextView) rowView.findViewById(R.id.listProductTitle);
+		TextView priceView = (TextView) rowView.findViewById(R.id.listProductPrice);
 		TextView blurbView = (TextView) rowView.findViewById(R.id.listProductBlurb);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.listProductImage);
 		
 		titleView.setText(product.title);
+		priceView.setText(generatePrice(product.price));
 		blurbView.setText(product.blurb);
 		imageView.setImageResource(product.imageId);
 		
 		return rowView;
+	}
+
+	private String generatePrice(double price) {
+		return String.format("$%.2f", price);
 	}
 }

@@ -20,10 +20,19 @@
         android:textSize="16dp" />
 
     <TextView
-        android:id="@+id/listProductBlurb"
+        android:id="@+id/listProductPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/listProductTitle"
+        android:layout_toRightOf="@id/listProductImage"
+        android:textIsSelectable="false"
+        android:textSize="16dp" />
+    
+    <TextView
+        android:id="@+id/listProductBlurb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listProductPrice"
         android:layout_toRightOf="@id/listProductImage"
         android:textIsSelectable="false"
         android:textSize="14dp" />
