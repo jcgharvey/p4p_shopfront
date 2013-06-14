@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.BusinessLogic;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.receiptspp.shopfrontmockup.Common.Keys;
 
 public class MockReceipt implements Receipt {
 

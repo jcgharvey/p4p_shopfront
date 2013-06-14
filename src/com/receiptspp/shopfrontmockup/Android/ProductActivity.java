@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.Android;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,10 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.receiptspp.shopfrontmockup.R;
+import com.receiptspp.shopfrontmockup.BusinessLogic.Cart;
+import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
 import com.roscopeco.ormdroid.Entity;
 
 public class ProductActivity extends Activity {
 
+	private Product product;
+	private ProductActivity self;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,11 +28,13 @@ public class ProductActivity extends Activity {
 
 		Intent receivedIntent = getIntent();
 		int idOfProductToDisplay = receivedIntent.getExtras().getInt("product");
-		Product product = Entity.query(Product.class).where("id")
+		product = Entity.query(Product.class).where("id")
 				.eq(idOfProductToDisplay).execute();
 
 		setContentView(R.layout.activity_product);
-
+		
+		self = this;
+		
 		// set the fields
 
 		TextView titleView = (TextView) findViewById(R.id.viewProductTitle);
@@ -46,6 +54,9 @@ public class ProductActivity extends Activity {
 			public void onClick(View view) {
 				Toast.makeText(getApplicationContext(), "Add",
 						Toast.LENGTH_SHORT).show();
+				Cart cart = Cart.getInstance();
+				cart.addItem(product);
+				startActivity(new Intent(self, CartActivity.class));
 			}
 		});
 

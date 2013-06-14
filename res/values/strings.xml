@@ -6,6 +6,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_product">ProductActivity</string>
     <string name="addItemToCart">Add Item to Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="continueShopping">Continue Shopping</string>
+    <string name="cartProductsLabel">Products in Cart:</string>
 
     <!-- CONSTANTS -->
     <string name="product">Product</string>

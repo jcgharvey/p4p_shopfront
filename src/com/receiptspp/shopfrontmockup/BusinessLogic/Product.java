@@ -1,8 +1,9 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.BusinessLogic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.receiptspp.shopfrontmockup.Common.Keys;
 import com.roscopeco.ormdroid.Column;
 import com.roscopeco.ormdroid.Entity;
 import com.roscopeco.ormdroid.Table;

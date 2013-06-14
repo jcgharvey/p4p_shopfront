@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.Android;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.receiptspp.shopfrontmockup.R;
+import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
 import com.roscopeco.ormdroid.Entity;
 import com.roscopeco.ormdroid.ORMDroidApplication;
 
@@ -51,7 +53,7 @@ public class MainActivity extends Activity {
 		
 		ListView productContainer = (ListView) findViewById(R.id.productContainer);
 
-		ArrayAdapter<Product> adapter = new ProductArrayAdapter(this, products);
+		ArrayAdapter<Product> adapter = new ProductViewArrayAdapter(this, products);
 
 		productContainer.setAdapter(adapter);
 

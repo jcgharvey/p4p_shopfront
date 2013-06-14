@@ -1,6 +1,8 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.BusinessLogic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Cart {
@@ -67,6 +69,24 @@ public class Cart {
 			// if we have succeeded decrement the price.
 			totalTransaction -= price * currentQuantity;
 		}
+	}
+	
+	public List<Product> getProductsInCart(){
+		List<Product> products = new ArrayList<Product>();
+		for (Product p : cartProductQauntityMap.keySet()){
+			products.add(p);
+		}
+		return products;
+	}
+	
+	/**
+	 * Get the number of product in the cart. If not in the cart, return 0;
+	 * @param product
+	 * @return
+	 */
+	public Integer getQuantityOfProduct(Product product){
+		Integer quantity = cartProductQauntityMap.get(product); 
+		return quantity == null ? 0 : quantity;
 	}
 
 	public void clear() {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/listCartProductTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/listCartProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listCartProductTitle"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
+    
+    <TextView
+        android:id="@+id/listCartProductQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/listCartProductPrice"
+        android:textIsSelectable="false"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/listCartProductSubTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/listCartProductQuantity"
+        android:textIsSelectable="false"
+        android:textSize="20sp" />
+
+</RelativeLayout>

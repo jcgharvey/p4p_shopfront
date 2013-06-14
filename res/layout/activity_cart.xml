@@ -8,9 +8,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CartActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/continueShoppingButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:paddingBottom="8dp"
+        android:text="@string/continueShopping" />
+
+    <Button
+        android:id="@+id/checkoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/continueShoppingButton"
+        android:paddingBottom="8dp"
+        android:text="@string/checkout" />
+
+    <TextView
+        android:id="@+id/cartProductsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cartProductsLabel" />
+
+    <ListView
+        android:id="@+id/cartProductContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/checkoutButton" />
 
 </RelativeLayout>

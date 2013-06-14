@@ -1,8 +1,10 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.Android;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.receiptspp.shopfrontmockup.R;
 
 public class CheckoutActivity extends Activity {
 

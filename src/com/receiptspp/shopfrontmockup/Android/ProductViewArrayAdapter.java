@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup;
+package com.receiptspp.shopfrontmockup.Android;
 
 import java.util.List;
 
@@ -10,12 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ProductArrayAdapter extends ArrayAdapter<Product> {
+import com.receiptspp.shopfrontmockup.R;
+import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
+import com.receiptspp.shopfrontmockup.Common.Util;
+
+public class ProductViewArrayAdapter extends ArrayAdapter<Product> {
 
 	private Context context;
 	private List<Product> products;
 
-	public ProductArrayAdapter(Context context, List<Product> products) {
+	public ProductViewArrayAdapter(Context context, List<Product> products) {
 		super(context, R.layout.product_list_item, products);
 		this.context = context;
 		this.products = products;
@@ -28,21 +32,17 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.product_list_item, parent,
 				false);
-		rowView.setTag(R.id.productId, product.id);
+		rowView.setTag(R.id.productId, product.getId());
 		TextView titleView = (TextView) rowView.findViewById(R.id.listProductTitle);
 		TextView priceView = (TextView) rowView.findViewById(R.id.listProductPrice);
 		TextView blurbView = (TextView) rowView.findViewById(R.id.listProductBlurb);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.listProductImage);
 		
-		titleView.setText(product.title);
-		priceView.setText(generatePrice(product.price));
-		blurbView.setText(product.blurb);
-		imageView.setImageResource(product.imageId);
+		titleView.setText(product.getTitle());
+		priceView.setText(Util.generatePriceString(product.getPrice()));
+		blurbView.setText(product.getBlurb());
+		imageView.setImageResource(product.getimageId());
 		
 		return rowView;
-	}
-
-	private String generatePrice(double price) {
-		return String.format("$%.2f", price);
 	}
 }
