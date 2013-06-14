@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Common;
+package com.receiptspp.shopfrontmockup.common;
 
 public class Keys {
 	
@@ -15,5 +15,5 @@ public class Keys {
 	public static final String receiptItem = "item";
 	public static final String receiptItems = "items";
 	public static final String receiptItemQuantity = "itemQuantity";
-		
+	public static final String receiptUserId = "userId";
 }

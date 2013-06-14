@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Android;
+package com.receiptspp.shopfrontmockup.android;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.receiptspp.shopfrontmockup.R;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Cart;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
+import com.receiptspp.shopfrontmockup.business.Cart;
+import com.receiptspp.shopfrontmockup.business.Product;
 
 public class CartActivity extends Activity {
 
@@ -50,7 +50,7 @@ public class CartActivity extends Activity {
 		
 		ListView cartProductContainer = (ListView) findViewById(R.id.cartProductContainer);
 
-		ArrayAdapter<Product> adapter = new ProductViewArrayAdapter(this, cart.getProductsInCart());
+		ArrayAdapter<Product> adapter = new CartViewArrayAdapter(this, cart.getProductsInCart());
 
 		cartProductContainer.setAdapter(adapter);
 
@@ -61,10 +61,10 @@ public class CartActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "Item no. " + position,
 						Toast.LENGTH_SHORT).show();
 				
-//				Intent productViewIntent = new Intent(self, ProductActivity.class);
-//				int idOfProductInView = Integer.parseInt(view.getTag(R.id.productId).toString());
-//				productViewIntent.putExtra("product", idOfProductInView);
-//				startActivity(productViewIntent);
+				Intent productViewIntent = new Intent(self, ProductActivity.class);
+				int idOfProductInView = Integer.parseInt(view.getTag(R.id.productId).toString());
+				productViewIntent.putExtra("product", idOfProductInView);
+				startActivity(productViewIntent);
 			}
 		});
 	}

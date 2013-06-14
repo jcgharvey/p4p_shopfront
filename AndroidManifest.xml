@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.receiptspp.shopfrontmockup.Activities.MainActivity"
+            android:name="com.receiptspp.shopfrontmockup.android.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.receiptspp.shopfrontmockup.Activities.ProductActivity"
+            android:name="com.receiptspp.shopfrontmockup.android.ProductActivity"
             android:label="@string/title_activity_product" >
         </activity>
 
@@ -32,11 +32,11 @@
             android:value="products" />
 
         <activity
-            android:name="com.receiptspp.shopfrontmockup.Activities.CheckoutActivity"
+            android:name="com.receiptspp.shopfrontmockup.android.CheckoutActivity"
             android:label="@string/title_activity_checkout" >
         </activity>
         <activity
-            android:name="com.receiptspp.shopfrontmockup.CartActivity"
+            android:name="com.receiptspp.shopfrontmockup.android.CartActivity"
             android:label="@string/title_activity_cart" >
         </activity>
     </application>

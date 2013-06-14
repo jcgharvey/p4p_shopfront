@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Common;
+package com.receiptspp.shopfrontmockup.common;
 
 public class Util {
 	public static String generatePriceString(double price){

@@ -20,19 +20,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/continueShoppingButton"
-        android:paddingBottom="8dp"
+        android:paddingBottom="16dp"
         android:text="@string/checkout" />
 
     <TextView
         android:id="@+id/cartProductsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cartProductsLabel" />
+        android:layout_below="@id/checkoutButton"
+        android:text="@string/cartProductsLabel" 
+        android:textSize="20sp"/>
 
     <ListView
         android:id="@+id/cartProductContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/checkoutButton" />
+        android:layout_below="@id/cartProductsLabel" />
 
 </RelativeLayout>

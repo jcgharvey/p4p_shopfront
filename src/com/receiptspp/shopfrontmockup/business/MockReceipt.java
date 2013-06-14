@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.BusinessLogic;
+package com.receiptspp.shopfrontmockup.business;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.receiptspp.shopfrontmockup.Common.Keys;
+import com.receiptspp.shopfrontmockup.common.Keys;
 
 public class MockReceipt implements Receipt {
 
@@ -17,10 +17,26 @@ public class MockReceipt implements Receipt {
 	private String address;
 	private double totalTransaction;
 	private double taxRate;
+	private String userId;
 
 	public MockReceipt() {
 		productsMap = new HashMap<JSONObject, Integer>();
 		totalTransaction = 0.0;
+	}
+
+	public MockReceipt(Boolean setUpFromCart) {
+		this();
+		if (setUpFromCart) {
+			Cart cart = Cart.getInstance();
+			Map<Product, Integer> productMap = cart.getCartProductQuantityMap();
+			for (Map.Entry<Product, Integer> entry : productMap.entrySet()) {
+				productsMap.put(entry.getKey().toJSON(), entry.getValue());
+			}
+			String tempId = cart.getUserId();
+			if (tempId != null){
+				this.userId = tempId;
+			}
+		}
 	}
 
 	public void setName(String name) {
@@ -51,7 +67,6 @@ public class MockReceipt implements Receipt {
 				productsMap.put(json, quantity + 1);
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -64,6 +79,8 @@ public class MockReceipt implements Receipt {
 		receipt = jsonPut(receipt, Keys.receiptPhone, phone);
 		receipt = jsonPut(receipt, Keys.receiptAddress, address);
 		receipt = jsonPut(receipt, Keys.receiptTaxRate, taxRate);
+		receipt = jsonPut(receipt, Keys.receiptUserId, userId);
+
 		try {
 			receipt.put(Keys.receiptItems, listToJSONArray());
 		} catch (JSONException e) {
@@ -80,6 +97,8 @@ public class MockReceipt implements Receipt {
 			json.put(key, obj);
 		} catch (JSONException e) {
 			// the field might not have been set, we're not fussed
+		} catch (NullPointerException e) {
+			// the obj might be null
 		}
 		return json;
 	}

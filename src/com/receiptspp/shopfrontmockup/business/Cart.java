@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.BusinessLogic;
+package com.receiptspp.shopfrontmockup.business;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ public class Cart {
 
 	private Map<Product, Integer> cartProductQauntityMap = new HashMap<Product, Integer>();
 	private double totalTransaction = 0.0;
+	private String userId;
 
 	// Private constructor prevents instantiation from other classes
 	private Cart() {
@@ -16,7 +17,6 @@ public class Cart {
 
 	private static class CartHolder {
 		public static final Cart INSTANCE = new Cart();
-
 	}
 
 	public static Cart getInstance() {
@@ -70,31 +70,41 @@ public class Cart {
 			totalTransaction -= price * currentQuantity;
 		}
 	}
-	
-	public List<Product> getProductsInCart(){
+
+	public List<Product> getProductsInCart() {
 		List<Product> products = new ArrayList<Product>();
-		for (Product p : cartProductQauntityMap.keySet()){
+		for (Product p : cartProductQauntityMap.keySet()) {
 			products.add(p);
 		}
 		return products;
 	}
-	
+
 	/**
 	 * Get the number of product in the cart. If not in the cart, return 0;
+	 * 
 	 * @param product
 	 * @return
 	 */
-	public Integer getQuantityOfProduct(Product product){
-		Integer quantity = cartProductQauntityMap.get(product); 
+	public Integer getQuantityOfProduct(Product product) {
+		Integer quantity = cartProductQauntityMap.get(product);
 		return quantity == null ? 0 : quantity;
 	}
 
 	public void clear() {
 		cartProductQauntityMap.clear();
 		totalTransaction = 0.0;
+		userId = null;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public Map<Product, Integer> getCartProductQauntityMap() {
+	public Map<Product, Integer> getCartProductQuantityMap() {
 		return cartProductQauntityMap;
 	}
 

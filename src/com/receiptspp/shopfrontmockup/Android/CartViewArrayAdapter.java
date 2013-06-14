@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Android;
+package com.receiptspp.shopfrontmockup.android;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.receiptspp.shopfrontmockup.R;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Cart;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
-import com.receiptspp.shopfrontmockup.Common.Util;
+import com.receiptspp.shopfrontmockup.business.Cart;
+import com.receiptspp.shopfrontmockup.business.Product;
+import com.receiptspp.shopfrontmockup.common.Util;
 
 public class CartViewArrayAdapter extends ArrayAdapter<Product> {
 
@@ -21,7 +21,7 @@ public class CartViewArrayAdapter extends ArrayAdapter<Product> {
 	private Cart cart;
 
 	public CartViewArrayAdapter(Context context, List<Product> products) {
-		super(context, R.layout.product_list_item, products);
+		super(context, R.layout.cart_list_item, products);
 		this.context = context;
 		this.products = products;
 		this.cart = Cart.getInstance();
@@ -37,7 +37,7 @@ public class CartViewArrayAdapter extends ArrayAdapter<Product> {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.cart_list_item, parent, false);
-		rowView.setTag(R.id.productId, product.id);
+		rowView.setTag(R.id.productId, product.getId());
 		
 		// get text views
 		TextView titleView = (TextView) rowView
@@ -52,7 +52,7 @@ public class CartViewArrayAdapter extends ArrayAdapter<Product> {
 		// set text views
 		titleView.setText(product.getTitle());
 		priceView.setText(Util.generatePriceString(price));
-		quantityView.setText(quantity);
+		quantityView.setText(quantity.toString());
 		subtotalView.setText(Util.generatePriceString(subTotal));
 
 		return rowView;

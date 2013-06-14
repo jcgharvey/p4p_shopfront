@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Android;
+package com.receiptspp.shopfrontmockup.android;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.receiptspp.shopfrontmockup.R;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Cart;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
+import com.receiptspp.shopfrontmockup.business.Cart;
+import com.receiptspp.shopfrontmockup.business.Product;
 import com.roscopeco.ormdroid.Entity;
 
 public class ProductActivity extends Activity {

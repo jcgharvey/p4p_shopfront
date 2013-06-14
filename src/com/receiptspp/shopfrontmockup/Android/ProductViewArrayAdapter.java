@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Android;
+package com.receiptspp.shopfrontmockup.android;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.receiptspp.shopfrontmockup.R;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
-import com.receiptspp.shopfrontmockup.Common.Util;
+import com.receiptspp.shopfrontmockup.business.Product;
+import com.receiptspp.shopfrontmockup.common.Util;
 
 public class ProductViewArrayAdapter extends ArrayAdapter<Product> {
 

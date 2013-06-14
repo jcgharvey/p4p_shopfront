@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <TextView
         android:id="@+id/listCartProductTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:textIsSelectable="false"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/listCartProductPrice"
@@ -19,21 +19,45 @@
         android:layout_below="@id/listCartProductTitle"
         android:textIsSelectable="false"
         android:textSize="16sp" />
-    
+
+    <TextView
+        android:id="@+id/listCartQuantityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listCartProductTitle"
+        android:layout_toRightOf="@id/listCartProductPrice"
+        android:paddingLeft="12dp"
+        android:text="@string/listCartQuantityLabel"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
+
     <TextView
         android:id="@+id/listCartProductQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/listCartProductPrice"
+        android:layout_below="@id/listCartProductTitle"
+        android:layout_toRightOf="@id/listCartQuantityLabel"
         android:textIsSelectable="false"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
+    
+    <TextView
+        android:id="@+id/listCartSubTotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listCartProductTitle"
+        android:layout_toRightOf="@id/listCartProductQuantity"
+        android:paddingLeft="12dp"
+        android:text="@string/listCartSubTotalLabel"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
     
     <TextView
         android:id="@+id/listCartProductSubTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/listCartProductQuantity"
+        android:layout_below="@id/listCartProductTitle"
+        android:layout_toRightOf="@id/listCartSubTotalLabel"
         android:textIsSelectable="false"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

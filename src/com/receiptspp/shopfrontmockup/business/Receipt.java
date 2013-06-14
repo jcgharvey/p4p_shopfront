@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.BusinessLogic;
+package com.receiptspp.shopfrontmockup.business;
 
 import org.json.JSONObject;
 

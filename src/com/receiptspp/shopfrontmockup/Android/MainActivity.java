@@ -1,4 +1,4 @@
-package com.receiptspp.shopfrontmockup.Android;
+package com.receiptspp.shopfrontmockup.android;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.receiptspp.shopfrontmockup.R;
-import com.receiptspp.shopfrontmockup.BusinessLogic.Product;
+import com.receiptspp.shopfrontmockup.business.Product;
 import com.roscopeco.ormdroid.Entity;
 import com.roscopeco.ormdroid.ORMDroidApplication;
 

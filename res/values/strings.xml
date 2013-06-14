@@ -9,7 +9,9 @@
     <string name="checkout">Checkout</string>
     <string name="continueShopping">Continue Shopping</string>
     <string name="cartProductsLabel">Products in Cart:</string>
-
+    <string name="listCartQuantityLabel">Qty:</string>
+    <string name="listCartSubTotalLabel">Total:</string>
+    <string name="id/checkoutConfirmButtonText">Confirm Purchase</string>
     <!-- CONSTANTS -->
     <string name="product">Product</string>
     <string name="title_activity_checkout">Checkout</string>

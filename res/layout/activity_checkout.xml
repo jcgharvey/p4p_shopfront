@@ -9,8 +9,41 @@
     tools:context=".CheckoutActivity" >
 
     <TextView
+        android:id="@+id/checkoutProductsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/cartProductsLabel"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/checkoutProductSubtotalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/checkoutProductSubtotal"
+        android:paddingRight="12dp"
+        android:layout_alignParentRight="true"
+        android:text="@string/listCartSubTotalLabel"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/checkoutProductSubtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cartProductsLabel"
+        android:layout_alignParentRight="true"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/checkoutConfirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkoutProductsLabel"
+        android:text="@string/checkoutConfirmButtonText" />
+
+    <ListView
+        android:id="@+id/checkoutProductContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/checkoutConfirmButton" />
 
 </RelativeLayout>
