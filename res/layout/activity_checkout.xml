@@ -8,42 +8,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CheckoutActivity" >
 
+    <Button
+        android:id="@+id/checkoutConfirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkoutConfirmButtonText" />
+
     <TextView
         android:id="@+id/checkoutProductsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/checkoutConfirmButton"
         android:text="@string/cartProductsLabel"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/checkoutProductSubtotalLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/checkoutProductSubtotal"
-        android:paddingRight="12dp"
-        android:layout_alignParentRight="true"
-        android:text="@string/listCartSubTotalLabel"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/checkoutProductSubtotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cartProductsLabel"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/checkoutConfirmButton"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/checkoutConfirmButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/checkoutProductSubtotalLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/checkoutProductsLabel"
-        android:text="@string/checkoutConfirmButtonText" />
+        android:layout_below="@id/checkoutConfirmButton"
+        android:layout_toLeftOf="@id/checkoutProductSubtotal"
+        android:paddingRight="12dp"
+        android:text="@string/listCartSubTotalLabel"
+        android:textSize="20sp" />
 
     <ListView
         android:id="@+id/checkoutProductContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/checkoutConfirmButton" />
+        android:layout_below="@id/checkoutProductsLabel" />
 
 </RelativeLayout>

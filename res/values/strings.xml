@@ -11,7 +11,7 @@
     <string name="cartProductsLabel">Products in Cart:</string>
     <string name="listCartQuantityLabel">Qty:</string>
     <string name="listCartSubTotalLabel">Total:</string>
-    <string name="id/checkoutConfirmButtonText">Confirm Purchase</string>
+    <string name="checkoutConfirmButtonText">Confirm Purchase</string>
     <!-- CONSTANTS -->
     <string name="product">Product</string>
     <string name="title_activity_checkout">Checkout</string>

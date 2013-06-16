@@ -8,6 +8,8 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permissions.NFC" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -34,6 +36,13 @@
         <activity
             android:name="com.receiptspp.shopfrontmockup.android.CheckoutActivity"
             android:label="@string/title_activity_checkout" >
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/com.receiptspp.shopfrontmockup.android" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.receiptspp.shopfrontmockup.android.CartActivity"

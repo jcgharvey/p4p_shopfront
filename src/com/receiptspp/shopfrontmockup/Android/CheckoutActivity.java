@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
+import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -16,12 +18,14 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.receiptspp.shopfrontmockup.R;
 import com.receiptspp.shopfrontmockup.business.Cart;
 import com.receiptspp.shopfrontmockup.business.MockReceipt;
 import com.receiptspp.shopfrontmockup.business.Product;
+import com.receiptspp.shopfrontmockup.common.Util;
 
 public class CheckoutActivity extends Activity {
 
@@ -33,9 +37,13 @@ public class CheckoutActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkout);
+		
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
+		
 		cart = Cart.getInstance();
+		
+		TextView subTotalView = (TextView) findViewById(R.id.checkoutProductSubtotal);
+		subTotalView.setText(Util.generatePriceString(cart.getTotalTransaction()));
 
 		ListView checkoutProductContainer = (ListView) findViewById(R.id.checkoutProductContainer);
 
