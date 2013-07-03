@@ -16,4 +16,8 @@ public class Keys {
 	public static final String receiptItems = "items";
 	public static final String receiptItemQuantity = "itemQuantity";
 	public static final String receiptUserId = "userId";
+	
+	// Endpoints
+	public static final String receiptsEndpointStart = "http://receiptspp.herokuapp.com/users/";
+	public static final String receiptsEndpointEnd = "/receipts";
 }

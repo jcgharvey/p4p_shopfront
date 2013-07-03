@@ -30,7 +30,9 @@ public class MockReceipt implements Receipt {
 			Cart cart = Cart.getInstance();
 			Map<Product, Integer> productMap = cart.getCartProductQuantityMap();
 			for (Map.Entry<Product, Integer> entry : productMap.entrySet()) {
+				Product p = (Product) entry.getKey();
 				productsMap.put(entry.getKey().toJSON(), entry.getValue());
+				totalTransaction += p.getPrice();
 			}
 			String tempId = cart.getUserId();
 			if (tempId != null){
@@ -71,6 +73,9 @@ public class MockReceipt implements Receipt {
 		}
 	}
 
+	/**
+	 * Get a JSON representation of our receipt
+	 */
 	@Override
 	public JSONObject toJSON() {
 		JSONObject receipt = new JSONObject();
@@ -80,9 +85,10 @@ public class MockReceipt implements Receipt {
 		receipt = jsonPut(receipt, Keys.receiptAddress, address);
 		receipt = jsonPut(receipt, Keys.receiptTaxRate, taxRate);
 		receipt = jsonPut(receipt, Keys.receiptUserId, userId);
-
+		
+		// add all the items to the receipt
 		try {
-			receipt.put(Keys.receiptItems, listToJSONArray());
+			receipt.put(Keys.receiptItems, productsMapToJSONArray());
 		} catch (JSONException e) {
 			// pass
 		}
@@ -91,7 +97,7 @@ public class MockReceipt implements Receipt {
 
 		return receipt;
 	}
-
+	
 	private JSONObject jsonPut(JSONObject json, String key, Object obj) {
 		try {
 			json.put(key, obj);
@@ -103,7 +109,7 @@ public class MockReceipt implements Receipt {
 		return json;
 	}
 
-	private JSONArray listToJSONArray() throws JSONException {
+	private JSONArray productsMapToJSONArray() throws JSONException {
 		JSONArray array = new JSONArray();
 		for (Map.Entry<JSONObject, Integer> entry : productsMap.entrySet()) {
 			JSONObject itemQuantityPair = new JSONObject();
