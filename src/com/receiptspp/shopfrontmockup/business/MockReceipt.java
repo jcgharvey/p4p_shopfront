@@ -16,7 +16,6 @@ public class MockReceipt implements Receipt {
 	private String phone;
 	private String address;
 	private double totalTransaction;
-	private double taxRate;
 	private String userId;
 
 	public MockReceipt() {
@@ -31,11 +30,12 @@ public class MockReceipt implements Receipt {
 			Map<Product, Integer> productMap = cart.getCartProductQuantityMap();
 			for (Map.Entry<Product, Integer> entry : productMap.entrySet()) {
 				Product p = (Product) entry.getKey();
-				productsMap.put(entry.getKey().toJSON(), entry.getValue());
-				totalTransaction += p.getPrice();
+				Integer qty = entry.getValue();
+				productsMap.put(p.toJSON(), entry.getValue());
+				totalTransaction += p.getPrice() * qty;
 			}
 			String tempId = cart.getUserId();
-			if (tempId != null){
+			if (tempId != null) {
 				this.userId = tempId;
 			}
 		}
@@ -52,11 +52,7 @@ public class MockReceipt implements Receipt {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public void setTaxRate(double taxRate) {
-		this.taxRate = taxRate;
-	}
-
+	
 	@Override
 	public void addItem(JSONObject json) {
 		try {
@@ -83,9 +79,8 @@ public class MockReceipt implements Receipt {
 		receipt = jsonPut(receipt, Keys.receiptStoreName, storeName);
 		receipt = jsonPut(receipt, Keys.receiptPhone, phone);
 		receipt = jsonPut(receipt, Keys.receiptAddress, address);
-		receipt = jsonPut(receipt, Keys.receiptTaxRate, taxRate);
 		receipt = jsonPut(receipt, Keys.receiptUserId, userId);
-		
+
 		// add all the items to the receipt
 		try {
 			receipt.put(Keys.receiptItems, productsMapToJSONArray());
@@ -97,7 +92,7 @@ public class MockReceipt implements Receipt {
 
 		return receipt;
 	}
-	
+
 	private JSONObject jsonPut(JSONObject json, String key, Object obj) {
 		try {
 			json.put(key, obj);
@@ -112,10 +107,9 @@ public class MockReceipt implements Receipt {
 	private JSONArray productsMapToJSONArray() throws JSONException {
 		JSONArray array = new JSONArray();
 		for (Map.Entry<JSONObject, Integer> entry : productsMap.entrySet()) {
-			JSONObject itemQuantityPair = new JSONObject();
-			itemQuantityPair.put(Keys.receiptItem, entry.getKey());
-			itemQuantityPair.put(Keys.receiptItemQuantity, entry.getValue());
-			array.put(itemQuantityPair);
+			JSONObject item = entry.getKey();
+			item.put(Keys.receiptItemQuantity, entry.getValue());
+			array.put(item);
 		}
 		return array;
 	}

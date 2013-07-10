@@ -52,8 +52,6 @@ public class ProductActivity extends Activity {
 		addItemButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getApplicationContext(), "Add",
-						Toast.LENGTH_SHORT).show();
 				Cart cart = Cart.getInstance();
 				cart.addItem(product);
 				startActivity(new Intent(self, CartActivity.class));

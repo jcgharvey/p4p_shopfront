@@ -3,8 +3,8 @@ package com.receiptspp.shopfrontmockup.common;
 public class Keys {
 	
 	// Product Keys
-	public static final String productTitle = "title";
-	public static final String productPrice = "price";
+	public static final String productTitle = "name";
+	public static final String productPrice = "pricePerItem";
 	
 	// Receipt Keys
 	public static final String receiptStoreName = "storeName";
@@ -14,7 +14,7 @@ public class Keys {
 	public static final String receiptTaxRate = "taxRate";
 	public static final String receiptItem = "item";
 	public static final String receiptItems = "items";
-	public static final String receiptItemQuantity = "itemQuantity";
+	public static final String receiptItemQuantity = "quantity";
 	public static final String receiptUserId = "userId";
 	
 	// Endpoints

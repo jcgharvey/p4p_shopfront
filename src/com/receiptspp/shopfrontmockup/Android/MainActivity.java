@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.receiptspp.shopfrontmockup.R;
 import com.receiptspp.shopfrontmockup.business.Product;
@@ -61,8 +60,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(), "Item no. " + view.getTag(R.id.productId),
-						Toast.LENGTH_SHORT).show();
 				
 				Intent productViewIntent = new Intent(self, ProductActivity.class);
 				int idOfProductInView = Integer.parseInt(view.getTag(R.id.productId).toString());

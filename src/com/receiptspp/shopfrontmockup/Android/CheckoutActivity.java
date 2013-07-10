@@ -81,7 +81,6 @@ public class CheckoutActivity extends Activity {
 							Toast.LENGTH_LONG).show();
 					MockReceipt receipt = new MockReceipt(true);
 					receipt.setName("Trimtex Mock Store");
-					Log.v("checkout", receipt.toJSON().toString());
 					SubmitJsonToServer jsonUpload = new SubmitJsonToServer();
 					jsonUpload.execute(receipt.toJSON().toString());
 				}
@@ -173,7 +172,8 @@ public class CheckoutActivity extends Activity {
 
 			String userId = Cart.getInstance().getUserId();
 			// call httpPost method to post the json to the server
-			result = httpPost(jsonSE, new HttpPost(Keys.receiptsEndpointStart + userId + Keys.receiptsEndpointEnd));
+			result = httpPost(jsonSE, new HttpPost(Keys.receiptsEndpointStart
+					+ userId + Keys.receiptsEndpointEnd));
 
 			return result;
 		}
