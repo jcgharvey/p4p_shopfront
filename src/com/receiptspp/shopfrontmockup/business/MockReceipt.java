@@ -1,5 +1,7 @@
 package com.receiptspp.shopfrontmockup.business;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +17,11 @@ public class MockReceipt implements Receipt {
 	private String storeName;
 	private String phone;
 	private String address;
+	private String category;
 	private double totalTransaction;
 	private String userId;
+	private String dateTime;
+	private static final String serverFormat = "dd/MM/yyyy HH:mm:ss";
 
 	public MockReceipt() {
 		productsMap = new HashMap<JSONObject, Integer>();
@@ -38,6 +43,8 @@ public class MockReceipt implements Receipt {
 			if (tempId != null) {
 				this.userId = tempId;
 			}
+			this.dateTime = new SimpleDateFormat(serverFormat).format(Calendar
+					.getInstance().getTime());
 		}
 	}
 
@@ -52,7 +59,7 @@ public class MockReceipt implements Receipt {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	@Override
 	public void addItem(JSONObject json) {
 		try {
@@ -71,25 +78,28 @@ public class MockReceipt implements Receipt {
 
 	/**
 	 * Get a JSON representation of our receipt
+	 * 
+	 * @throws JSONException
 	 */
 	@Override
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 		JSONObject receipt = new JSONObject();
 
-		receipt = jsonPut(receipt, Keys.receiptStoreName, storeName);
+		receipt.put(Keys.receiptStoreName, storeName);
 		receipt = jsonPut(receipt, Keys.receiptPhone, phone);
 		receipt = jsonPut(receipt, Keys.receiptAddress, address);
-		receipt = jsonPut(receipt, Keys.receiptUserId, userId);
 
+		receipt.put(Keys.receiptUserId, userId);
+		receipt.put(Keys.receiptDateTime, dateTime);
+		receipt.put(Keys.receiptCategory, category);
 		// add all the items to the receipt
 		try {
 			receipt.put(Keys.receiptItems, productsMapToJSONArray());
 		} catch (JSONException e) {
 			// pass
 		}
-		receipt = jsonPut(receipt, Keys.receiptTotalTransaction,
-				totalTransaction);
 
+		receipt.put(Keys.receiptTotalTransaction, totalTransaction);
 		return receipt;
 	}
 
@@ -112,6 +122,10 @@ public class MockReceipt implements Receipt {
 			array.put(item);
 		}
 		return array;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

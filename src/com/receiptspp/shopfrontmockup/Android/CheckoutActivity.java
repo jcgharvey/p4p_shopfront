@@ -82,7 +82,12 @@ public class CheckoutActivity extends Activity {
 					MockReceipt receipt = new MockReceipt(true);
 					receipt.setName("Trimtex Mock Store");
 					SubmitJsonToServer jsonUpload = new SubmitJsonToServer();
-					jsonUpload.execute(receipt.toJSON().toString());
+					try {
+						String jsonString = receipt.toJSON().toString();
+						jsonUpload.execute(jsonString);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+					}
 				}
 			}
 		});
@@ -171,11 +176,28 @@ public class CheckoutActivity extends Activity {
 			boolean result = true;
 
 			String userId = Cart.getInstance().getUserId();
+
+			String url = Keys.receiptsEndpointStart + userId
+					+ Keys.receiptsEndpointEnd;
+
+			Log.v("checkout", url);
+			Log.v("checkout", jsonString);
+
 			// call httpPost method to post the json to the server
-			result = httpPost(jsonSE, new HttpPost(Keys.receiptsEndpointStart
-					+ userId + Keys.receiptsEndpointEnd));
+			result = httpPost(jsonSE, new HttpPost(url));
 
 			return result;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			if (result) {
+				Intent intent = new Intent(getApplicationContext(),
+						MainActivity.class);
+				startActivity(intent);
+				finish();
+			}
 		}
 
 		/**
