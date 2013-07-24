@@ -81,6 +81,7 @@ public class CheckoutActivity extends Activity {
 							Toast.LENGTH_LONG).show();
 					MockReceipt receipt = new MockReceipt(true);
 					receipt.setName("Trimtex Mock Store");
+					receipt.setCategory("Sports");
 					SubmitJsonToServer jsonUpload = new SubmitJsonToServer();
 					try {
 						String jsonString = receipt.toJSON().toString();
@@ -193,6 +194,9 @@ public class CheckoutActivity extends Activity {
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
 			if (result) {
+				// Clear cart
+				Cart.getInstance().clear();
+				// Launch main activity
 				Intent intent = new Intent(getApplicationContext(),
 						MainActivity.class);
 				startActivity(intent);
@@ -239,6 +243,7 @@ public class CheckoutActivity extends Activity {
 			// winning
 			return true;
 		}
+	
 	}
 
 }
