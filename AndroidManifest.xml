@@ -44,6 +44,11 @@
 
                 <data android:mimeType="application/com.receiptspp.shopfrontmockup.android" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.receiptspp.shopfrontmockup.android.CartActivity"
