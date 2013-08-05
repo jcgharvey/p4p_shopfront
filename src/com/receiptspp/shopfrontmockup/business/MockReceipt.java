@@ -74,7 +74,7 @@ public class MockReceipt implements Receipt {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
+}
 
 	/**
 	 * Get a JSON representation of our receipt
@@ -89,7 +89,6 @@ public class MockReceipt implements Receipt {
 		receipt = jsonPut(receipt, Keys.receiptPhone, phone);
 		receipt = jsonPut(receipt, Keys.receiptAddress, address);
 
-		receipt.put(Keys.receiptUserId, userId);
 		receipt.put(Keys.receiptDateTime, dateTime);
 		receipt.put(Keys.receiptCategory, category);
 		// add all the items to the receipt

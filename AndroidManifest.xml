@@ -8,7 +8,7 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permissions.NFC" />
+    <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -43,6 +43,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="application/com.receiptspp.shopfrontmockup.android" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity

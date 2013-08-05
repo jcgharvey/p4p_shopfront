@@ -8,6 +8,8 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -15,9 +17,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentFilter.MalformedMimeTypeException;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.NfcA;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -40,9 +47,12 @@ import com.receiptspp.shopfrontmockup.common.Util;
 
 public class CheckoutActivity extends Activity {
 
-	@SuppressWarnings("unused")
 	private NfcAdapter mNfcAdapter;
 	private Cart cart;
+	private NfcA mNfc;
+	private PendingIntent pendingIntent;
+	private IntentFilter[] intentFiltersArray;
+	private String[][] techListsArray;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,19 @@ public class CheckoutActivity extends Activity {
 		setContentView(R.layout.activity_checkout);
 
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+		// pending intent to be used for foreground dispatch
+		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
+				getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+		IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		try {
+			// TODO: sort out this mime time.
+			ndef.addDataType("*/*");
+		} catch (MalformedMimeTypeException e) {
+			throw new RuntimeException();
+		}
+		intentFiltersArray = new IntentFilter[] { ndef, };
+		techListsArray = new String[][] { new String[] { NfcA.class.getName() } };
 
 		cart = Cart.getInstance();
 
@@ -81,6 +104,7 @@ public class CheckoutActivity extends Activity {
 							Toast.LENGTH_LONG).show();
 					MockReceipt receipt = new MockReceipt(true);
 					receipt.setName("Trimtex Mock Store");
+					receipt.setCategory("Sports");
 					SubmitJsonToServer jsonUpload = new SubmitJsonToServer();
 					try {
 						String jsonString = receipt.toJSON().toString();
@@ -101,11 +125,56 @@ public class CheckoutActivity extends Activity {
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		mNfcAdapter.disableForegroundDispatch(this);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
+		mNfcAdapter.enableForegroundDispatch(this, pendingIntent,
+				intentFiltersArray, techListsArray);
 		// Check to see that the Activity started due to an Android Beam
 		if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
 			processIntent(getIntent());
+		}
+	}
+
+	@Override
+	public void onNewIntent(Intent intent) {
+		Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+		if (tag != null) {
+			processTag(tag);
+		}
+	}
+
+	/**
+	 * Process a TECH intent, that is an intent from a smart card
+	 * 
+	 * @param intent
+	 */
+	private void processTag(Tag tag) {
+		mNfc = NfcA.get(tag);
+		try {
+			mNfc.connect();
+			Log.d("tag", "connected.");
+			byte[] id = mNfc.getTag().getId();
+			Log.d("tag", "Got id from tag:" + id);
+			// Toast.makeText(this, "Hop: " + Util.getHex(id),
+			// Toast.LENGTH_LONG).show();
+			String cardId = Util.getHex(id);
+			new GetUserFromCard().execute(cardId);
+		} catch (IOException e) {
+			Log.d("tag", "error reading the tag");
+		} finally {
+			if (mNfc != null) {
+				try {
+					mNfc.close();
+				} catch (IOException e) {
+					Log.d("tag", "error closing the tag");
+				}
+			}
 		}
 	}
 
@@ -115,7 +184,7 @@ public class CheckoutActivity extends Activity {
 	 * 
 	 * @param intent
 	 */
-	void processIntent(Intent intent) {
+	private void processIntent(Intent intent) {
 
 		Parcelable[] rawMsgs = intent
 				.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -140,8 +209,70 @@ public class CheckoutActivity extends Activity {
 		}
 	}
 
+	private class GetUserFromCard extends AsyncTask<String, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			String cardId = params[0];
+
+			HttpClient client = new DefaultHttpClient();
+
+			String url = Keys.receiptsSmartcard + cardId;
+
+			HttpGet get = new HttpGet(url);
+
+			HttpResponse response;
+
+			try {
+				response = client.execute(get);
+				InputStream ins = response.getEntity().getContent();
+				BufferedReader buff = new BufferedReader(new InputStreamReader(
+						ins));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = buff.readLine()) != null) {
+					sb.append(line);
+				}
+
+				JSONObject json = new JSONObject(sb.toString());
+				boolean enabled = json.getBoolean(Keys.cardEnabled);
+				if (enabled) {
+					String userId = json.getString(Keys.userId);
+					Cart.getInstance().setUserId(userId);
+					return true;
+				}
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// Cart.getInstance().setUserId(userId);
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			if (result) {
+				Toast.makeText(getApplicationContext(),
+						"User: " + Cart.getInstance().getUserId(),
+						Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(getBaseContext(), "Card not active.",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+
+	}
+
 	/**
-	 * Async task for network access
+	 * Async task for Uploading JSON receipt data to server
 	 * 
 	 * @author Jourdan Harvey
 	 * 
@@ -193,6 +324,9 @@ public class CheckoutActivity extends Activity {
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
 			if (result) {
+				// Clear cart
+				Cart.getInstance().clear();
+				// Launch main activity
 				Intent intent = new Intent(getApplicationContext(),
 						MainActivity.class);
 				startActivity(intent);
@@ -239,6 +373,7 @@ public class CheckoutActivity extends Activity {
 			// winning
 			return true;
 		}
+
 	}
 
 }
