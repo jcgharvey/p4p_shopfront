@@ -17,6 +17,7 @@ public class Keys {
 	public static final String receiptItemQuantity = "quantity";
 	public static final String receiptDateTime = "date_time";
 	public static final String receiptCategory = "category";
+	public static final String cardEnabled = "smartcard_enabled";
 
 	// Endpoints
 	public static final String receiptsBaseUrl = "http://receiptspp.herokuapp.com/";

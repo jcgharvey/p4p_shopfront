@@ -233,10 +233,14 @@ public class CheckoutActivity extends Activity {
 				while ((line = buff.readLine()) != null) {
 					sb.append(line);
 				}
-				
+
 				JSONObject json = new JSONObject(sb.toString());
-				String userId = json.getString(Keys.userId);
-				Cart.getInstance().setUserId(userId);
+				boolean enabled = json.getBoolean(Keys.cardEnabled);
+				if (enabled) {
+					String userId = json.getString(Keys.userId);
+					Cart.getInstance().setUserId(userId);
+					return true;
+				}
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -249,13 +253,20 @@ public class CheckoutActivity extends Activity {
 			}
 
 			// Cart.getInstance().setUserId(userId);
-			return null;
+			return false;
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
-			Toast.makeText(getApplicationContext(), "User: " + Cart.getInstance().getUserId(), Toast.LENGTH_LONG).show();
+			if (result) {
+				Toast.makeText(getApplicationContext(),
+						"User: " + Cart.getInstance().getUserId(),
+						Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(getBaseContext(), "Card not active.",
+						Toast.LENGTH_LONG).show();
+			}
 		}
 
 	}
