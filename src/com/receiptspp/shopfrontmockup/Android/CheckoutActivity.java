@@ -144,18 +144,17 @@ public class CheckoutActivity extends Activity {
 	@Override
 	public void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
+		// We can get NDEF so use the processIntent method
 		if (intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES) != null) {
-			Log.v("nfc","Going to process NDEF intent");
 			processIntent(intent);
 			return;
 		}
+		// Otherwise we process the tag
 		Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 		if (tag != null){
-			Log.v("nfc","Processing tag");
 			processTag(tag);
 			return;
 		}
-		Log.v("nfc","Doing nothing");
 	}
 
 	/**
